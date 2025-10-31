@@ -1,0 +1,195 @@
+\documentclass[
+	pdftex,			% Seitenangaben ins pdf schreiben
+	11pt,			% Schriftgröße 12pt
+	a4paper, 		% Layout für DIN A4
+	twoside, 		% Layout für zweiseitigen Druck
+	BCOR=2cm,		% Binderandkorrektur
+	DIV=11,			% a little more room on page
+	listof=totoc
+]{report} 
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage[top=2cm, right=3cm, bottom=2cm, left=3cm]{geometry}
+\usepackage{calc}
+\usepackage{graphicx}	
+\usepackage{amsmath}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage[official]{eurosym}
+\usepackage{lastpage}
+\usepackage{etoolbox}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{acronym} % Abbkürzungsverzeichnis
+
+% Symbolverzeichnis
+\usepackage{listofsymbols}
+\renewcommand{\symheading}{\chapter*{List of Symbols}}
+
+% Abbildungen mit Tikz erstellen
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata,shapes,calc}
+
+
+% Zeilenabstand
+\usepackage{setspace}
+\onehalfspacing
+
+% Kopfzeile
+\usepackage[automark]{scrlayer-scrpage}
+\pagestyle{scrheadings}
+\clearmainofpairofpagestyles
+\ihead{}
+%\ihead[\rightmark]{\pagemark}
+\chead{}
+%\chead{}{}
+\ohead{\pagemark}
+%\ohead[\pagemark]{\rightmark}
+
+
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+
+% For custom environments
+\usepackage{amsthm}
+\newtheorem*{task}{Task}
+
+% For large norm symbol
+\usepackage{physics}
+
+% For subfigures
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Defining some colors
+\definecolor{embedding}{rgb}{0.988, 0.498, 0.137}
+\definecolor{neighbor}{rgb}{0.039, 0.620, 0.910}
+\definecolor{input}{rgb}{0.486, 0.506, 0.494}
+\definecolor{euclidean}{rgb}{0.325, 0.251, 0.467}
+\definecolor{geodesic}{rgb}{0.188, 0.400, 0.216}
+\definecolor{mds}{rgb}{0.106, 0.620, 0.467}
+\definecolor{lle}{rgb}{0.851, 0.373, 0.008}
+\definecolor{tsne}{rgb}{0.459, 0.439, 0.702}
+\definecolor{rib_cage}{rgb}{0.235, 0.706, 0.294}
+\definecolor{back_tail}{rgb}{1, 0.882, 0.098}
+\definecolor{head}{rgb}{0.569, 0.118, 0.706}
+\definecolor{front_feet}{rgb}{0.902, 0.098, 0.294}
+\definecolor{back_feet}{rgb}{0.263, 0.388, 0.847}
+
+
+\usepackage{multirow}
+
+% Ende allgemeine Angaben
+\begin{document}
+
+% Beginn Titelseite
+\hypersetup{pageanchor=false}
+\thispagestyle{empty}
+\includegraphics[width=\columnwidth]{images/cau-norm-de-lilagrey-rgb-0720.png}
+
+
+\begin{center}
+
+    \vspace{1cm}
+    INSTITUT FÜR INFORMATIK \\
+    TECHNISCHE FAKULTÄT \\
+    DER CHRISTIAN-ALBRECHTS-UNIVERSITÄT ZU KIEL \\
+    
+    \vspace{2cm}
+    {\huge Bachelor Thesis}
+    
+    \vspace{2.25cm}
+    {\Huge A Comparison of Manifold Learning Methods} \\
+    
+    \vspace{3cm}
+    First examiner: Prof. Dr. Peer Kröger \\
+    Second examiner: Dr. Daniyal Kazempour \\
+    
+    \vspace{1.75cm}
+    Author: \\
+    {Yilmaz Atakan Kara, 1137425} \\
+    {Westring 288, 24116 Kiel} \\
+    {stu216493@mail.uni-kiel.de} \\
+    
+    \vspace{1.25cm}
+    Handed in on: \\
+    Kiel, 28.09.2023
+    
+\end{center}
+% Ende Titelseite
+
+\newpage
+\section*{Eidesstattliche Erklärung}
+Ich versichere an Eides statt, dass ich die vorstehende Arbeit selbständig und ohne fremde Hilfe angefertigt und mich anderer als der im beigefügten Verzeichnis angegebenen Hilfsmittel nicht bedient habe. Alle Stellen, die wörtlich oder sinngemäß aus Veröffentlichungen übernommen wurden, sind als solche kenntlich gemacht. Alle Internetquellen sind der Arbeit beigefügt. Des Weiteren versichere ich, dass ich die Arbeit vorher nicht in einem anderen Prüfungsverfahren eingereicht habe und dass die eingereichte schriftliche Fassung der auf dem elektronischen Speichermedium entspricht.\\
+
+
+\vspace{3cm}
+\begin{flushleft}
+Ort, Datum \hspace{10.76cm} Unterschrift
+\end{flushleft}
+\thispagestyle{empty}
+
+\chapter*{Abstract}
+\input{chapters/abstract}
+
+% Inhaltsverzeichnis
+\newpage
+\hypersetup{pageanchor=true}
+\pagenumbering{Roman}
+\renewcommand{\thepage}{\Roman{page}}
+\tableofcontents{}
+
+% Abbildungsverzeichnis
+\newpage
+\cleardoublepage
+\listoffigures
+\addcontentsline{toc}{chapter}{List of Figures}
+
+
+% Tabellenverzeichnis
+\newpage
+\cleardoublepage
+\listoftables
+\addcontentsline{toc}{chapter}{List of Tables}
+
+
+\newpage
+\pagenumbering{arabic}
+\renewcommand{\thepage}{\arabic{page}}
+
+% Introduction
+\input{chapters/introduction}
+
+\newpage
+
+\input{chapters/related_work}
+\newpage
+
+\input{chapters/theoretical_foundation}
+\newpage
+
+\input{chapters/methodology}
+\newpage
+
+\input{chapters/results}
+\newpage
+
+\input{chapters/summary_and_outlook}
+
+
+% Literaturverzeichnis
+\newpage
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{abbrv}
+\bibliography{bibliography}
+
+
+%% Anhang
+%\newpage
+%\appendix
+%\chapter{First}
+%\input{chapters/appendix}
+
+\end{document}
